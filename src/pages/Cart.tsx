@@ -2,6 +2,7 @@ import { useAuth } from "../utils/AuthContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchCart, type CartItem, removeFromCart } from "../utils/Cart";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { token } = useAuth();
@@ -10,9 +11,12 @@ export default function Cart() {
   const [error, setError] = useState<string | null>(null);
   const [removing, setRemoving] = useState(0);
   const [refresh, setRefresh] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
     fetchCart()
       .then(setItems)
       .catch((e) => {

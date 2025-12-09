@@ -5,7 +5,7 @@ import ProductCard from "../components/ProductCard";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -15,10 +15,9 @@ export default function Products() {
         console.log(e);
         setError("Failed to load products");
       })
-      .finally(() => setLoading(false));
+      .finally();
   }, []);
 
-  if (loading) return <p className="text-center mt-5">Loading products...</p>;
   if (error) return <p className="text-center text-danger mt-5">{error}</p>;
 
   return (

@@ -4,12 +4,12 @@ export default function Navbar() {
   const { isAuthenticated } = useUser();
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top w-100">
-      <a className="navbar-brand" href="/">
+      <a className="navbar-brand ms-4" href="/">
         {" "}
         Shopping Cart App
       </a>
 
-      <div className="ms-auto d-flex align-items-center gap-3">
+      <div className="ms-auto d-flex align-items-center gap-3 me-4">
         <a
           href={isAuthenticated ? "/profile" : "/login"}
           className="text-dark fs-4"

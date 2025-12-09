@@ -8,6 +8,7 @@ import ProductDetail from "./pages/ProductDetail.tsx";
 import AuthRoute from "./utils/AuthRoute.tsx";
 import Profile from "./pages/Profile.tsx";
 import ManageProducts from "./pages/ManageProduct.tsx";
+import Register from "./pages/Register.tsx";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/manage-products" element={<ManageProducts />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/profile"
             element={

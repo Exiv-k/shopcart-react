@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { token, login } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  if (token) {
+    navigate("/profile", { replace: true });
+    return;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,11 +27,11 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message || "Login failed");
+        setError(data.message || "Login failed");
+      } else {
+        login(data.token);
+        navigate("/", { replace: true });
       }
-
-      login(data.token);
-      navigate("/");
     } catch (err) {
       console.error(err);
       alert("Login failure");
@@ -57,10 +63,14 @@ export default function Login() {
             required
           />
         </div>
-
+        {error && <p className="text-danger">{error}</p>}
         <button type="submit" className="btn btn-primary w-100">
           Login
         </button>
+        <div className="text-center mt-3">
+          <span className="text-muted">Don't have an account?</span>{" "}
+          <Link to="/register">Register</Link>
+        </div>
       </form>
     </div>
   );
