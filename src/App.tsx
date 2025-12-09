@@ -6,6 +6,8 @@ import Cart from "./pages/Cart.tsx";
 import Navbar from "./components/Navbar.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import AuthRoute from "./utils/AuthRoute.tsx";
+import Profile from "./pages/Profile.tsx";
+import ManageProducts from "./pages/ManageProduct.tsx";
 function App() {
   return (
     <>
@@ -15,6 +17,15 @@ function App() {
           <Route path="/" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/manage-products" element={<ManageProducts />} />
+          <Route
+            path="/profile"
+            element={
+              <AuthRoute>
+                <Profile />
+              </AuthRoute>
+            }
+          />
           <Route
             path="/cart"
             element={

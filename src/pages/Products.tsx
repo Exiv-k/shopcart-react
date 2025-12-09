@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import type { Product } from "../utils/Products";
 import { fetchProducts } from "../utils/Products";
+import ProductCard from "../components/ProductCard";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,23 +26,7 @@ export default function Products() {
       <h1 className="mb-4 text-center"> Products </h1>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
         {products.map((p) => (
-          <div key={p.id} className="col">
-            <div className="card h-100">
-              <Link to={`/product/${p.id}`}>
-                <img
-                  src={p.image}
-                  className="card-img-top"
-                  alt={p.name}
-                  style={{ height: 220, objectFit: "cover" }}
-                />
-              </Link>
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{p.name}</h5>
-                <p className="card-text fw-bold mb-2">${p.price}</p>
-                <p className="card-text small flex-grow-1">{p.description}</p>
-              </div>
-            </div>
-          </div>
+          <ProductCard product={p}></ProductCard>
         ))}
       </div>
     </main>

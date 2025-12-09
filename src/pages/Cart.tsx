@@ -1,5 +1,6 @@
 import { useAuth } from "../utils/AuthContext";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchCart, type CartItem, removeFromCart } from "../utils/Cart";
 
 export default function Cart() {
@@ -8,11 +9,11 @@ export default function Cart() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [removing, setRemoving] = useState(0);
-  const [refresh, setRefresh] = useState(0);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     if (!token) return;
-    fetchCart(token)
+    fetchCart()
       .then(setItems)
       .catch((e) => {
         console.log(e);
@@ -23,7 +24,6 @@ export default function Cart() {
 
   if (loading) return <p className="text-center mt-5">Loading cart...</p>;
   if (error) return <p className="text-center text-danger mt-5">{error}</p>;
-  console.log(items);
   if (items.length === 0) {
     return (
       <main className="container my-4">
@@ -36,7 +36,7 @@ export default function Cart() {
   const handleRemoval = (pid: number) => {
     if (!token) return;
     setRemoving(pid);
-    removeFromCart(token, pid)
+    removeFromCart(pid)
       .then()
       .catch((e) => {
         console.log(e);
@@ -44,12 +44,15 @@ export default function Cart() {
       })
       .finally(() => {
         setRemoving(0);
-        setRefresh(1);
+        setRefresh(!refresh);
       });
   };
 
   return (
     <main className="container-xl my-4">
+      <Link to="/" className="btn btn-link mb-3">
+        ← Back to products
+      </Link>
       <h1 className="mb-4">Your Cart</h1>
       {items.map((item) => {
         const total = item.price * item.quantity;
@@ -60,13 +63,11 @@ export default function Cart() {
             key={item.product_id}
             className="card mb-3 p-3 position-relative"
           >
-            {/* Title */}
             <h5 className="fw-bold mb-3">{item.name}</h5>
 
-            {/* Image center */}
             <div className="d-flex justify-content-center mb-3">
               <img
-                src={item.image} // MUST be returned from backend
+                src={item.image}
                 alt={item.name}
                 className="rounded"
                 style={{
@@ -78,13 +79,11 @@ export default function Cart() {
               />
             </div>
 
-            {/* Bottom row: qty × price */}
             <div className="d-flex justify-content-between align-items-center">
               <div className="text-muted">
                 {item.quantity} × ${item.price}
               </div>
 
-              {/* Right side: total + remove */}
               <div className="d-flex align-items-center gap-3">
                 <span className="fw-bold fs-5 text-success">${total}</span>
 

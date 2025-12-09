@@ -27,13 +27,13 @@ export default function ProductDetail() {
 
   const handleAddToCart = async () => {
     if (!token) {
-      navigate("/login", { state: { from: location } });
+      navigate("/login", { state: { from: location.pathname } });
       return;
     }
 
     if (!product) return;
     setAdding(true);
-    addToCart(token, product.id)
+    addToCart(product.id)
       .then(() => navigate("/cart"))
       .catch((e) => {
         console.log(e);

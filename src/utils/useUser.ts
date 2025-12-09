@@ -6,6 +6,7 @@ import type { Role } from './JWTDecoder';
 export type User = {
     username: string;
     role: Role;
+    last_login: string;
 }
 
 export function useUser() {
@@ -18,9 +19,11 @@ export function useUser() {
         const username = (payload.username as string)
         if (!username) return null;
 
-        const role = payload.role as Role ?? 'USER';
+        const roles = payload.roles as Role[];
+        const role = roles[0];
+        const last_login = "";
 
-        return { username, role };
+        return { username, role, last_login };
     }, [token]);
 
     const isAuthenticated = !!user;

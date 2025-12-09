@@ -3,7 +3,7 @@ export type Role = "USER" | "ADMIN";
 export type JwtPayload = {
   sub?: string;
   username?: string;
-  role?: Role;
+  roles?: Role[];
   exp?: number;
 };
 
