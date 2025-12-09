@@ -1,6 +1,10 @@
 # Simple React Shopcart
 
-This project includes a React frontend that implements a simple user login, adding/removing items to/from cart app.
+This project includes a React frontend that implements a shopping cart app that has
+- user login/registration
+- adding/removing items to/from a shopping cart
+- ADMIN user changing item availability
+
 The backend implementation can be found at https://github.com/Exiv-k/shopcart-backend
 
 ## Frontend (React)
