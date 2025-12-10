@@ -1,7 +1,7 @@
 import { useAuth } from "../utils/AuthContext";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchCart, type CartItem, removeFromCart } from "../utils/Cart";
+import { fetchCart, type CartItem, removeFromCart } from "../apis/Cart";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {

@@ -5,7 +5,7 @@ import Login from "./pages/Login.tsx";
 import Cart from "./pages/Cart.tsx";
 import Navbar from "./components/Navbar.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
-import AuthRoute from "./utils/AuthRoute.tsx";
+import AuthRoute from "./routes/AuthRoute.tsx";
 import Profile from "./pages/Profile.tsx";
 import ManageProducts from "./pages/ManageProduct.tsx";
 import Register from "./pages/Register.tsx";

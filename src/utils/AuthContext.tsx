@@ -9,20 +9,18 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const STORAGE_KEY = "token";
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(() => {
-    return localStorage.getItem(STORAGE_KEY);
+    return localStorage.getItem("token");
   });
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem(STORAGE_KEY, token);
+      localStorage.setItem("token", token);
     } else {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem("token", "");
     }
   }, [token]);
 

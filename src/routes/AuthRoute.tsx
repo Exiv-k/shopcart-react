@@ -1,4 +1,4 @@
-import { useUser } from "./useUser";
+import { useUser } from "../utils/useUser";
 import { Navigate, useLocation } from "react-router-dom";
 import { type JSX } from "react";
 

@@ -7,7 +7,7 @@ const http = axios.create({
 // Request interceptors that inject token into header
 
 http.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token'); // or whatever key you use
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${token}`;
@@ -22,7 +22,7 @@ http.interceptors.response.use(
   (error) => {
     console.log(error);
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
+      localStorage.setItem('token', '');
       window.location.href = '/login';
     }
 

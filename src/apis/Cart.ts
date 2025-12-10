@@ -1,4 +1,4 @@
-import http from './http'
+import http from '../utils/http'
 
 export type CartItem = {
     product_id: number;

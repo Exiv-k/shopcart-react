@@ -1,6 +1,6 @@
 // src/pages/ManageProducts.tsx
 import { useEffect, useState } from "react";
-import { fetchProducts, type Product } from "../utils/Products";
+import { fetchProducts, type Product } from "../apis/Products";
 import { useUser } from "../utils/useUser";
 import ProductCard from "../components/ProductCard";
 

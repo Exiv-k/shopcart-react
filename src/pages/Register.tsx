@@ -52,7 +52,10 @@ export default function Register() {
           <input
             className={`form-control ${!userValid ? "is-invalid" : ""}`}
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setError(null);
+            }}
             required
           />
           {!userValid && (
@@ -71,7 +74,10 @@ export default function Register() {
               !passValid || !passLong ? "is-invalid" : ""
             }`}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setError(null);
+            }}
             required
           />
           {!passValid && (

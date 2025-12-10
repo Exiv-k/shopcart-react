@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import type { Product } from "../utils/Products";
-import { fetchProduct } from "../utils/Products";
+import type { Product } from "../apis/Products";
+import { fetchProduct } from "../apis/Products";
 import { useAuth } from "../utils/AuthContext";
-import { addToCart } from "../utils/Cart";
+import { addToCart } from "../apis/Cart";
 
 export default function ProductDetail() {
   const { id } = useParams();

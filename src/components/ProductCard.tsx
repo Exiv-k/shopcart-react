@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct, type Product } from "../utils/Products";
+import { deleteProduct, type Product } from "../apis/Products";
 
 type Props = {
   product: Product;

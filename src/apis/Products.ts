@@ -1,5 +1,5 @@
 const API_BASE = import.meta.env.VITE_API_BASE;
-import http from './http';
+import http from '../utils/http';
 export type Product = {
     id: number;
     name: string;

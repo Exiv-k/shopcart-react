@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 import { Link } from "react-router-dom";
@@ -7,12 +7,13 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { token, login } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const [error, setError] = useState<string | null>(null);
-  if (token) {
-    navigate("/profile", { replace: true });
-    return;
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

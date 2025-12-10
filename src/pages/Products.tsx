@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Product } from "../utils/Products";
-import { fetchProducts } from "../utils/Products";
+import type { Product } from "../apis/Products";
+import { fetchProducts } from "../apis/Products";
 import ProductCard from "../components/ProductCard";
 
 export default function Products() {
