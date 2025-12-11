@@ -13,7 +13,7 @@ export default function Products() {
       .then(setProducts)
       .catch((e) => {
         console.log(e);
-        setError("Failed to load products");
+        setError("No products available");
       })
       .finally();
   }, []);

@@ -20,7 +20,7 @@ export default function ProductDetail() {
       .then(setProduct)
       .catch((err) => {
         console.log(err);
-        setError("Failed to load product.");
+        setError("Product doen not exist.");
       })
       .finally(() => setLoading(false));
   }, [id]);

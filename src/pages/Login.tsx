@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/", { replace: true });
+      navigate("/profile", { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -31,11 +31,10 @@ export default function Login() {
         setError(data.message || "Login failed");
       } else {
         login(data.token);
-        navigate("/", { replace: true });
       }
     } catch (err) {
       console.error(err);
-      alert("Login failure");
+      alert("Error: Cannot login");
     }
   };
 
