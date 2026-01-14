@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { deleteProduct, type Product } from "../apis/Products";
 
@@ -16,6 +16,7 @@ export default function ProductCard({
   enableClick = true,
 }: Props) {
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleRemove = async () => {
     const ok = window.confirm("Remove this product?");
@@ -33,11 +34,11 @@ export default function ProductCard({
   if (error) {
     return <p>{error}</p>;
   }
-  /*
+
   const handleEdit = () => {
     navigate(`/product/${product.id}/edit`);
   };
-  */
+
   return (
     <div className="card h-100">
       {enableClick ? (
@@ -66,14 +67,14 @@ export default function ProductCard({
         {/* Action buttons for admin mode */}
         {enableEdit ? (
           <div className="d-flex gap-2 mt-3">
-            {/*
-            <button
-              className="btn btn-sm btn-outline-primary flex-fill"
-              onClick={handleEdit}
-            >
-              Edit
-            </button>
-            */}
+            {
+              <button
+                className="btn btn-sm btn-outline-primary flex-fill"
+                onClick={handleEdit}
+              >
+                Edit
+              </button>
+            }
             <button
               className="btn btn-sm btn-outline-danger flex-fill"
               onClick={handleRemove}
