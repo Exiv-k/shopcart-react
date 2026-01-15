@@ -10,6 +10,9 @@ import Profile from "./pages/Profile.tsx";
 import ManageProducts from "./pages/ManageProduct.tsx";
 import Register from "./pages/Register.tsx";
 import EditProduct from "./pages/EditProduct.tsx";
+import CheckoutSuccess from "./pages/CheckoutSuccess.tsx";
+import CheckoutCancel from "./pages/CheckoutCancel.tsx";
+
 function App() {
   return (
     <>
@@ -21,6 +24,8 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/manage-products" element={<ManageProducts />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/checkout/cancel" element={<CheckoutCancel />} />
           <Route
             path="/product/:id/edit"
             element={

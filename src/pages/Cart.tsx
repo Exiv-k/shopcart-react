@@ -1,5 +1,6 @@
 import { useAuth } from "../utils/AuthContext";
-import { useEffect, useState } from "react";
+import http from "../utils/http";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchCart, type CartItem, removeFromCart } from "../apis/Cart";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,11 @@ export default function Cart() {
         setError("Failed to load cart");
       })
       .finally(() => setLoading(false));
-  }, [token, refresh]);
+  }, [token, refresh, navigate]);
+
+  const subtotal = useMemo(() => {
+    return items.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  }, [items]);
 
   if (loading) return <p className="text-center mt-5">Loading cart...</p>;
   if (error) return <p className="text-center text-danger mt-5">{error}</p>;
@@ -52,6 +57,17 @@ export default function Cart() {
       });
   };
 
+  const handleCheckout = async () => {
+    try {
+      setError(null);
+      const res = await http.post("/api/checkout");
+      window.location.href = res.data.sessionUrl;
+    } catch (e: any) {
+      console.error(e);
+      setError(e?.response?.data?.error || "Failed to checkout.");
+    }
+  };
+
   return (
     <main className="container-xl my-4">
       <Link to="/" className="btn btn-link mb-3">
@@ -61,7 +77,6 @@ export default function Cart() {
       {items.map((item) => {
         const total = item.price * item.quantity;
         const isRemoving = removing === item.product_id;
-
         return (
           <div
             key={item.product_id}
@@ -103,6 +118,17 @@ export default function Cart() {
           </div>
         );
       })}
+
+      <div className="card p-3">
+        <div className="d-flex justify-content-between">
+          <div className="text-muted">Subtotal</div>
+          <div className="fw-bold">${subtotal.toFixed(2)}</div>
+        </div>
+
+        <button className="btn btn-success w-100 mt-3" onClick={handleCheckout}>
+          Proceed to checkout
+        </button>
+      </div>
     </main>
   );
 }
